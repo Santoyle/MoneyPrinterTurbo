@@ -843,8 +843,8 @@ Silencedetect threshold raised from `d=1` to `d=2` for Spanish content validatio
 ### Manual QA status
 
 Topics 1–3: `done` — manually approved 2026-06-26.
-Topics 4–6: `manual_qa_pending` — rendered 2026-06-26, technically validated, awaiting manual review.
-Topics 7–10: `pending` — not rendered yet.
+Topics 4–6: `done` — manually approved 2026-06-26.
+Topics 7–10: rendering next.
 
 ### Render results — Topics 4–6
 
