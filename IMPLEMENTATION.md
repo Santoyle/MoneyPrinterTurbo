@@ -865,3 +865,89 @@ All 3: WAV extracted, 0 silences >=2s, Spanish subtitles confirmed, real Pexels 
   - PowerShell 5.1: explicit UTF-8 bytes required for accented chars in HTTP body
   - Batch script silencedetect threshold hardcoded at d=1 — re-validate Spanish content manually at d=2
   - Moov atom race: batch script may flag FAIL if it reads file before MoviePy finishes writing
+
+---
+
+## M9 — Editorial Quality Upgrade
+
+**Branch:** `implementation/m9-editorial-quality-upgrade`
+**Date:** 2026-06-26
+**Status:** 3/3 validation videos rendered and technically validated — awaiting manual QA
+
+### Goal
+
+Upgrade the Spanish AI productivity preset from v1 to v2 using an A/B editorial test.
+Test two editorial variants (Direct/Tactical vs. Story/Tension) on 3 new topics,
+score scripts against a 9-criterion rubric, and build a v2 hybrid preset from the winner.
+
+### New files (versionable)
+
+| File | Purpose |
+|------|---------|
+| `content/topics/spanish_ai_productivity_editorial_test_v1.csv` | 3 editorial test topics |
+| `content/presets/shorts_spanish_ai_productivity_v1.json` | Original v1 preset (kept as reference) |
+| `content/presets/shorts_spanish_ai_productivity_v2_direct.json` | Variant A — Direct/Tactical |
+| `content/presets/shorts_spanish_ai_productivity_v2_story.json` | Variant B — Story/Tension |
+| `content/presets/shorts_spanish_ai_productivity_v2.json` | Final v2 hybrid preset |
+
+### v1 Audit findings
+
+- `script_prompt_template`: no explicit 3-part structure, short cliché blocklist, no mandated real examples
+- Scripts produced adequate but generic content; no hooks tied to concrete situations
+- Kept as backup — M8 batch used v1 and all 10 videos passed manual QA
+
+### A/B test results (9-criterion rubric, 5-point scale, 45 max)
+
+| Topic | V1 | Variant A (Direct) | Variant B (Story) | Winner |
+|-------|-----|-----|-----|--------|
+| T1 — Delegas mal | 31 | 40 | 38 | **A** |
+| T2 — Señales pensar peor | 35 | 37 | 36 | **A** |
+| T3 — Decisiones sin criterio | 38 | 38 | 40 | **B** |
+
+- **Overall winner: Variant A (Direct/Tactical)** — wins 2/3 on specificity and actionability
+- B wins on conceptual/paradoxical topics (T3); best individual phrases across all 9 scripts
+- Standout phrases: "delegaste una niebla" (B-T1), "el daño silencioso: no te sustituye, te ablanda" (V1-T2)
+
+### v2 hybrid preset design
+
+Combines A's mandatory specificity with B's tension-hook option:
+- **PARTE 1 — APERTURA**: opens with paradox (B's approach) OR direct error (A's approach) — never warmup questions
+- **PARTE 2 — DESARROLLO**: mandatory named real tools (ChatGPT, Notion, Copilot, Excel); max 15 words/sentence
+- **PARTE 3 — CIERRE**: single concrete actionable today; uncomfortable question allowed; no "reflexiona/considera"
+- **REGLAS ABSOLUTAS**: expanded cliché blocklist (15 banned phrases + variants)
+
+### Key technical fix — video_script_prompt max_length exceeded
+
+The v2 prompt template (~1950 chars + angle/audience/tone extras) exceeded the API's
+`video_script_prompt` field limit of 2000 chars (`app/models/schema.py:111`), causing HTTP 400.
+
+**Fix:** Split the prompt across two API fields:
+- `custom_system_prompt` (8000-char limit): structural instructions (PARTE 1/2/3 + REGLAS ABSOLUTAS)
+- `script_prompt_template` / `video_script_prompt` (2000-char limit): word count constraint only (44 chars after substitution)
+
+`custom_system_prompt` replaces the server's default system prompt (`llm.py:640`). The "Initialization"
+block (subject, language, paragraph) is always appended by the server regardless.
+
+Both `content/presets/shorts_spanish_ai_productivity_v2.json` and
+`scripts/generate_from_csv_openai_pexels.ps1` (`Build-RequestParams`) updated.
+
+### M9 validation render results
+
+| # | Topic | Task ID | Duration | WAV | Silencedetect d=2 | Status |
+|---|-------|---------|----------|-----|-------------------|--------|
+| T1 | El problema no es que uses poca IA es que le delegas mal | b248ae0b | 47.67s | 8.1MB | 0 silences | manual_qa_pending |
+| T2 | Tres señales de que ChatGPT te está haciendo pensar peor | abe3c05e | 42.60s | 7.2MB | 0 silences | manual_qa_pending |
+| T3 | Cómo usar IA para tomar mejores decisiones sin apagar tu criterio | 659a690f | 44.50s | 7.5MB | 0 silences | manual_qa_pending |
+
+All 3 within preset range (35–55s). No silent blocks ≥2s detected. Pipeline: OpenAI + Pexels + es-ES-AlvaroNeural.
+
+### Generated script quality (v2 sample)
+
+T1 opening: *"Delegar mal a la IA te crea más trabajo."* + ChatGPT/Notion/Copilot examples + specific close
+T2 opening: *"ChatGPT puede hacerte producir más y pensar peor."* + concrete PDF/Slack/Excel scenarios
+T3: paradox hook + "optimiza frases, no supuestos financieros" + uncomfortable close question
+
+### Manual QA pending
+
+All 3 rows in `spanish_ai_productivity_editorial_test_v1.csv` set to `manual_qa_pending`.
+Do not mark as `done` until manual playback confirms audio, subtitles, footage, and script quality.

@@ -140,6 +140,7 @@ function Build-RequestParams {
         n_threads                   = [int]$preset.n_threads
         paragraph_number            = [int]$preset.paragraph_number
         video_script_prompt         = $ScriptPrompt
+        custom_system_prompt        = if ($preset.custom_system_prompt) { [string]$preset.custom_system_prompt } else { "" }
     }
 }
 

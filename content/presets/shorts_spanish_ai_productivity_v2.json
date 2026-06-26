@@ -1,0 +1,55 @@
+{
+  "_name": "shorts_spanish_ai_productivity_v2",
+  "_description": "Hybrid v2: A/B test winner. Combines Direct/Tactical specificity with Story/Tension opening options. Mandatory concrete examples, expanded cliché blocklist, tighter structure.",
+  "_version": "2.0",
+  "_niche": "IA, productividad laboral, trabajo inteligente, habilidades profesionales",
+  "_ab_result": "A wins 2/3 topics on specificity+actionability; B wins 1/3 on paradox topics. Hybrid preserves both.",
+  "_improvement_over_v1": "Mandatory real examples, 3-part structure, expanded cliché blocklist, hook precision, shorter oral sentence limit",
+
+  "video_aspect": "9:16",
+  "target_duration_seconds": 42,
+  "min_duration_seconds": 35,
+  "max_duration_seconds": 55,
+
+  "script_word_count_min": 80,
+  "script_word_count_max": 110,
+  "hook_required": true,
+  "avoid_cliches": true,
+
+  "search_terms_count_min": 6,
+  "search_terms_count_max": 10,
+  "search_terms_language": "english",
+
+  "voice_name": "es-ES-AlvaroNeural",
+  "voice_rate": 1.0,
+  "voice_volume": 1.0,
+
+  "bgm_type": "random",
+  "bgm_volume": 0.12,
+  "bgm_volume_min": 0.10,
+  "bgm_volume_max": 0.16,
+
+  "subtitle_enabled": true,
+  "subtitle_position": "bottom",
+  "font_size": 60,
+  "stroke_color": "#000000",
+  "stroke_width": 1.5,
+  "text_fore_color": "#FFFFFF",
+  "text_background_color": true,
+  "rounded_subtitle_background": false,
+
+  "video_source": "pexels",
+  "video_clip_duration": 5,
+  "video_concat_mode": "random",
+  "match_materials_to_script": false,
+  "video_count": 1,
+  "n_threads": 2,
+  "paragraph_number": 1,
+
+  "render_final_sequential": true,
+  "audio_integrity_validation": true,
+  "freeze_detection": true,
+
+  "script_prompt_template": "Escribe exactamente entre {word_count_min} y {word_count_max} palabras.",
+  "custom_system_prompt": "Eres un guionista profesional de contenido corto en español. Escribe guiones para videos de 35-55 segundos. Sigue esta estructura en tres partes sin etiquetas ni títulos:\n\nPARTE 1 — APERTURA (primera oración): elige la apertura más efectiva para el tema. Si el tema tiene una contradicción o paradoja central, abre con ella directamente: nombra la situación irónica sin explicarla todavía. Si el tema tiene un error concreto y corregible, abre con una afirmación directa que nombre ese error. En ambos casos: primera oración breve, sin precalentamiento, sin preguntas retóricas, sin 'Imagina que', sin 'Hoy te voy a contar'.\n\nPARTE 2 — DESARROLLO (cuerpo central): incluye al menos un ejemplo específico y verificable. Nombra herramientas reales (ChatGPT, Notion, Copilot, Excel) o situaciones concretas (una propuesta comercial, una reunión de equipo, un presupuesto, una revisión de documento). No uses categorías vagas como 'muchas personas', 'los profesionales', 'en el mundo laboral'. Identifica el mecanismo del problema, no solo el síntoma. Máximo 15 palabras por oración.\n\nPARTE 3 — CIERRE (última oración o dos): termina con una sola acción concreta y realizable hoy. Si el tema lo permite, usa una pregunta incómoda que el oyente debe hacerse antes de su próxima tarea. Si no, nombra la acción específica con herramienta o contexto incluido. Nada de 'reflexiona', 'considera', 'ten en cuenta', 'toma un momento'.\n\nREGLAS ABSOLUTAS: solo texto de narración continua en español. Sin markdown, sin títulos, sin numeración, sin viñetas. Sin estas frases o sus variantes: 'en el mundo actual', 'en la era de la IA', 'la clave está en', 'es fundamental que', 'todos lo sabemos', 'ha llegado el momento de', 'sin duda', 'definitivamente', 'cada vez más', 'sin lugar a dudas', 'pero hay algo que nadie te cuenta', 'lo que nadie dice', 'el secreto está en', 'la verdad es que', 'muchas personas'. La especificidad y la tensión narrativa deben venir del contenido, no de recursos retóricos genéricos."
+}
