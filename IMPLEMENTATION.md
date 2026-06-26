@@ -872,7 +872,7 @@ All 3: WAV extracted, 0 silences >=2s, Spanish subtitles confirmed, real Pexels 
 
 **Branch:** `implementation/m9-editorial-quality-upgrade`
 **Date:** 2026-06-26
-**Status:** 3/3 validation videos rendered and technically validated — awaiting manual QA
+**Status:** COMPLETE — 3/3 videos rendered, validated, and manually approved. Preset v2 recommended for all future Spanish batches.
 
 ### Goal
 
@@ -947,7 +947,14 @@ T1 opening: *"Delegar mal a la IA te crea más trabajo."* + ChatGPT/Notion/Copil
 T2 opening: *"ChatGPT puede hacerte producir más y pensar peor."* + concrete PDF/Slack/Excel scenarios
 T3: paradox hook + "optimiza frases, no supuestos financieros" + uncomfortable close question
 
-### Manual QA pending
+### Manual QA — COMPLETE
 
-All 3 rows in `spanish_ai_productivity_editorial_test_v1.csv` set to `manual_qa_pending`.
-Do not mark as `done` until manual playback confirms audio, subtitles, footage, and script quality.
+All 3 videos manually approved on 2026-06-26. All rows in `spanish_ai_productivity_editorial_test_v1.csv` set to `done`.
+
+- Audio: natural pace, no gaps, Spanish accent confirmed
+- Subtitles: synced, visible, correct Spanish
+- Footage: real Pexels content, no freeze, thematically relevant
+- Script quality: v2 prompt producing concrete, tool-specific, non-generic content
+
+**Preset v2 (`shorts_spanish_ai_productivity_v2`) is the recommended preset for all future Spanish AI productivity batches.**
+No generated media, audio, screenshots, logs, or secrets committed.
