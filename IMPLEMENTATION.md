@@ -842,8 +842,9 @@ Silencedetect threshold raised from `d=1` to `d=2` for Spanish content validatio
 
 ### Manual QA status
 
-Topics 1–3: `manual_qa_pending` — play final-1.mp4, confirm Spanish speech, subtitle sync, footage.
-Topics 4–10: `pending` — not rendered yet.
+Topics 1–3: `done` — manually approved 2026-06-26. Spanish pipeline validated end-to-end.
+Topics 4–6: rendering next.
+Topics 7–10: `pending` — not rendered yet.
 
 ### Next steps
 
