@@ -842,9 +842,7 @@ Silencedetect threshold raised from `d=1` to `d=2` for Spanish content validatio
 
 ### Manual QA status
 
-Topics 1–3: `done` — manually approved 2026-06-26.
-Topics 4–6: `done` — manually approved 2026-06-26.
-Topics 7–10: `manual_qa_pending` — rendered 2026-06-26, technically validated, awaiting manual review.
+Topics 1–10: `done` — all manually approved 2026-06-26. M8 batch COMPLETE.
 
 ### Render results — Topics 4–6
 
@@ -856,8 +854,14 @@ Topics 7–10: `manual_qa_pending` — rendered 2026-06-26, technically validate
 
 All 3: WAV extracted, 0 silences >=2s, Spanish subtitles confirmed, real Pexels footage, no freeze.
 
-### Next steps
+### M8 — Completion summary
 
-A. Manual QA topics 4–6 → mark done → render topics 7–10
-B. Consider es-MX-JorgeNeural as alternative for Latin American audience
-C. Raise batch script silencedetect threshold to d=2 for Spanish presets (false positives at d=1)
+- **Status:** COMPLETE — 10/10 videos technically validated, 10/10 manually approved
+- **Encoder:** h264_qsv (video_codec = auto) — used on all 10 renders, 0 fallbacks
+- **Pipeline:** OpenAI (script) + Pexels (footage) + es-ES-AlvaroNeural (voice) + edge-TTS + subtitles
+- **Safety:** config.toml excluded, storage/ excluded, generated media excluded, no secrets committed
+- **Key learnings:**
+  - es-ES-AlvaroNeural: use silencedetect d=2 (natural ~1s inter-sentence pauses trigger d=1)
+  - PowerShell 5.1: explicit UTF-8 bytes required for accented chars in HTTP body
+  - Batch script silencedetect threshold hardcoded at d=1 — re-validate Spanish content manually at d=2
+  - Moov atom race: batch script may flag FAIL if it reads file before MoviePy finishes writing
