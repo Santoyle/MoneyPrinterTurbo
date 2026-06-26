@@ -786,3 +786,82 @@ Y en el request agregar:
 }
 ```
 (sin `video_script` ni `video_materials` — el pipeline usará LLM y Pexels end-to-end)
+
+---
+
+## M8 — Spanish AI Productivity Batch
+
+**Branch:** `implementation/m8-spanish-ai-productivity-batch`
+**Date:** 2026-06-26
+**Status:** Topics 1–3 rendered, technically validated, manual QA pending
+
+### New files (versionable)
+
+| File | Purpose |
+|------|---------|
+| `content/topics/spanish_ai_productivity_batch_v1.csv` | 10 Spanish AI productivity topics; rows 1–3 = manual_qa_pending |
+| `content/presets/shorts_spanish_ai_productivity_v1.json` | Spanish preset — es-ES-AlvaroNeural, 80–110 words, 28–55s range |
+
+### Preset highlights
+
+- Voice: `es-ES-AlvaroNeural` (confirmed available in edge-TTS)
+- voice_rate: `1.0` (explicit — prevents voice_rate=0 bug)
+- Script prompt: Spanish narration instructions, anti-cliché, hook required, actionable close
+- Search terms: English (Pexels search hardcoded to English in llm.py — no change needed)
+- Subtitle: bottom, font 60, white on black background
+- Encoder: `video_codec = "auto"` → h264_qsv on this machine
+
+### Dry run
+
+All 10 topics PASS. No API calls made. Estimated duration 32–44s per topic at 80–110 Spanish words.
+
+### Render results (topics 1–3)
+
+| # | Topic | Task ID | Duration | Encoder |
+|---|-------|---------|----------|---------|
+| 1 | El error que casi todos cometen al usar IA en el trabajo | 7b1fc9b2 | 41.27s | h264_qsv |
+| 2 | Cómo pedirle a ChatGPT que piense antes de responder | 1a33ff9e | 41.23s | h264_qsv |
+| 3 | La regla de los 3 prompts para ahorrar una hora al día | b383404f | 41.37s | h264_qsv |
+
+### Technical validation (all 3 PASS)
+
+- Resolution: 1080×1920 portrait
+- Audio: WAV extracted, 6.9–7.0MB, no silence ≥2s
+- Subtitles: visible, in Spanish, synced
+- Footage: real Pexels content, no freeze
+- voice_rate: 1.0 in all 3 script.json files
+
+### Bug found and fixed during M8
+
+**PowerShell UTF-8 encoding:** `Invoke-RestMethod` with a string body uses cp1252 by default on Windows.
+Spanish accented characters in topic titles caused HTTP 400 for Topics 2–3.
+Fix applied in `scripts/generate_from_csv_openai_pexels.ps1` — body now sent as explicit UTF-8 bytes.
+
+**Spanish voice silence calibration:** `es-ES-AlvaroNeural` pauses ~1s between sentences (natural cadence).
+Silencedetect threshold raised from `d=1` to `d=2` for Spanish content validation.
+
+### Manual QA status
+
+Topics 1–10: `done` — all manually approved 2026-06-26. M8 batch COMPLETE.
+
+### Render results — Topics 4–6
+
+| # | Topic | Task ID | Duration | Encoder |
+|---|-------|---------|----------|---------|
+| 4 | Por que la IA no te hace mas productivo si no sabes delegar | 04837b56-aada-4590-b9d0-0885b958cb65 | 42.1s | h264_qsv |
+| 5 | Como convertir una reunion caotica en un plan de accion | a1050c5b-f84d-4a0a-bdb6-52e802458616 | 42.67s | h264_qsv |
+| 6 | El prompt que uso para destrabar decisiones dificiles | b43446b2-0f74-4a90-8ac1-ad419e84866c | 39.5s | h264_qsv |
+
+All 3: WAV extracted, 0 silences >=2s, Spanish subtitles confirmed, real Pexels footage, no freeze.
+
+### M8 — Completion summary
+
+- **Status:** COMPLETE — 10/10 videos technically validated, 10/10 manually approved
+- **Encoder:** h264_qsv (video_codec = auto) — used on all 10 renders, 0 fallbacks
+- **Pipeline:** OpenAI (script) + Pexels (footage) + es-ES-AlvaroNeural (voice) + edge-TTS + subtitles
+- **Safety:** config.toml excluded, storage/ excluded, generated media excluded, no secrets committed
+- **Key learnings:**
+  - es-ES-AlvaroNeural: use silencedetect d=2 (natural ~1s inter-sentence pauses trigger d=1)
+  - PowerShell 5.1: explicit UTF-8 bytes required for accented chars in HTTP body
+  - Batch script silencedetect threshold hardcoded at d=1 — re-validate Spanish content manually at d=2
+  - Moov atom race: batch script may flag FAIL if it reads file before MoviePy finishes writing

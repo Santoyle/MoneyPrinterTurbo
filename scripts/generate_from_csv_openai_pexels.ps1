@@ -319,7 +319,10 @@ function Wait-TaskComplete {
 function Submit-VideoTask {
     param([hashtable]$Params)
     $json = $Params | ConvertTo-Json -Depth 5
-    $resp = Invoke-RestMethod -Uri "$ServerUrl/api/v1/videos" -Method POST -Body $json -ContentType "application/json" -TimeoutSec 30
+    # Explicit UTF-8 bytes: PowerShell 5.1 does not force UTF-8 on string bodies,
+    # causing accented characters (e.g. Spanish) to be sent as cp1252 → 400 from server.
+    $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes($json)
+    $resp = Invoke-RestMethod -Uri "$ServerUrl/api/v1/videos" -Method POST -Body $bodyBytes -ContentType "application/json; charset=utf-8" -TimeoutSec 30
     return $resp.data.task_id
 }
 
