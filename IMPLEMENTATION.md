@@ -842,12 +842,22 @@ Silencedetect threshold raised from `d=1` to `d=2` for Spanish content validatio
 
 ### Manual QA status
 
-Topics 1–3: `done` — manually approved 2026-06-26. Spanish pipeline validated end-to-end.
-Topics 4–6: rendering next.
+Topics 1–3: `done` — manually approved 2026-06-26.
+Topics 4–6: `manual_qa_pending` — rendered 2026-06-26, technically validated, awaiting manual review.
 Topics 7–10: `pending` — not rendered yet.
+
+### Render results — Topics 4–6
+
+| # | Topic | Task ID | Duration | Encoder |
+|---|-------|---------|----------|---------|
+| 4 | Por que la IA no te hace mas productivo si no sabes delegar | 04837b56-aada-4590-b9d0-0885b958cb65 | 42.1s | h264_qsv |
+| 5 | Como convertir una reunion caotica en un plan de accion | a1050c5b-f84d-4a0a-bdb6-52e802458616 | 42.67s | h264_qsv |
+| 6 | El prompt que uso para destrabar decisiones dificiles | b43446b2-0f74-4a90-8ac1-ad419e84866c | 39.5s | h264_qsv |
+
+All 3: WAV extracted, 0 silences >=2s, Spanish subtitles confirmed, real Pexels footage, no freeze.
 
 ### Next steps
 
-A. Manual QA topics 1–3 → mark done → render topics 4–6
+A. Manual QA topics 4–6 → mark done → render topics 7–10
 B. Consider es-MX-JorgeNeural as alternative for Latin American audience
-C. Consider adding `video_language = "Spanish"` to API params for explicit LLM language control
+C. Raise batch script silencedetect threshold to d=2 for Spanish presets (false positives at d=1)
