@@ -1,0 +1,53 @@
+{
+  "_name": "shorts_spanish_ai_productivity_v2_story",
+  "_description": "Variante B — Story/Tension: contradicción → diagnóstico → giro → acción. Ideal para temas con conflicto conceptual o paradoja.",
+  "_version": "2.0-story",
+  "_niche": "IA, productividad laboral, trabajo inteligente, habilidades profesionales",
+  "_ab_variant": "B",
+
+  "video_aspect": "9:16",
+  "target_duration_seconds": 42,
+  "min_duration_seconds": 35,
+  "max_duration_seconds": 55,
+
+  "script_word_count_min": 80,
+  "script_word_count_max": 110,
+  "hook_required": true,
+  "avoid_cliches": true,
+
+  "search_terms_count_min": 6,
+  "search_terms_count_max": 10,
+  "search_terms_language": "english",
+
+  "voice_name": "es-ES-AlvaroNeural",
+  "voice_rate": 1.0,
+  "voice_volume": 1.0,
+
+  "bgm_type": "random",
+  "bgm_volume": 0.12,
+  "bgm_volume_min": 0.10,
+  "bgm_volume_max": 0.16,
+
+  "subtitle_enabled": true,
+  "subtitle_position": "bottom",
+  "font_size": 60,
+  "stroke_color": "#000000",
+  "stroke_width": 1.5,
+  "text_fore_color": "#FFFFFF",
+  "text_background_color": true,
+  "rounded_subtitle_background": false,
+
+  "video_source": "pexels",
+  "video_clip_duration": 5,
+  "video_concat_mode": "random",
+  "match_materials_to_script": false,
+  "video_count": 1,
+  "n_threads": 2,
+  "paragraph_number": 1,
+
+  "render_final_sequential": true,
+  "audio_integrity_validation": true,
+  "freeze_detection": true,
+
+  "script_prompt_template": "Escribe exactamente entre {word_count_min} y {word_count_max} palabras. Sigue esta estructura en cuatro partes sin etiquetas ni títulos:\n\nPARTE 1 — CONTRADICCIÓN (primera oración): abre con una paradoja o situación irónica que el oyente vive o ha vivido. Algo que parece lógico pero produce el resultado opuesto. No la expliques todavía. Nómbrala y déjala ahí. Sin preguntas retóricas. Sin 'Imagina que'. La contradicción debe ser reconocible, no abstracta.\n\nPARTE 2 — DIAGNÓSTICO (segundo bloque, 2 o 3 oraciones): explica por qué la mayoría comete ese error. Sé específico sobre el mecanismo del problema, no sobre el perfil de personas. Nombra la causa real, no solo el síntoma visible. Máximo 15 palabras por oración.\n\nPARTE 3 — GIRO (tercer bloque, 2 o 3 oraciones): introduce el cambio de perspectiva o el insight. Debe ser una corrección real, no un consejo obvio con palabras nuevas. Si no cambia cómo el oyente piensa sobre el tema, no es un giro. Evita 'la solución es', 'lo que debes hacer es'.\n\nPARTE 4 — CIERRE (última oración): termina con la acción mínima que cambia el resultado. Una sola acción concreta. No 'reflexiona', no 'considera', no 'ten en cuenta'. Nombra algo que se puede hacer en los próximos diez minutos.\n\nREGLAS ABSOLUTAS: solo texto de narración continua en español. Sin markdown, sin títulos, sin numeración, sin viñetas. Sin estas frases o sus variantes: 'pero hay algo que nadie te cuenta', 'lo que nadie dice', 'el secreto está en', 'en el mundo actual', 'la verdad es que', 'la clave está en', 'en la era de la IA', 'sin duda', 'definitivamente', 'muchas personas'. La tensión narrativa debe venir del contenido, no de fórmulas de suspense artificial."
+}

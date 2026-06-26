@@ -1,0 +1,53 @@
+{
+  "_name": "shorts_spanish_ai_productivity_v2_direct",
+  "_description": "Variante A — Direct/Tactical: afirmación fuerte, ejemplos concretos, cierre accionable. Ideal para tips de productividad IA.",
+  "_version": "2.0-direct",
+  "_niche": "IA, productividad laboral, trabajo inteligente, habilidades profesionales",
+  "_ab_variant": "A",
+
+  "video_aspect": "9:16",
+  "target_duration_seconds": 42,
+  "min_duration_seconds": 35,
+  "max_duration_seconds": 55,
+
+  "script_word_count_min": 80,
+  "script_word_count_max": 110,
+  "hook_required": true,
+  "avoid_cliches": true,
+
+  "search_terms_count_min": 6,
+  "search_terms_count_max": 10,
+  "search_terms_language": "english",
+
+  "voice_name": "es-ES-AlvaroNeural",
+  "voice_rate": 1.0,
+  "voice_volume": 1.0,
+
+  "bgm_type": "random",
+  "bgm_volume": 0.12,
+  "bgm_volume_min": 0.10,
+  "bgm_volume_max": 0.16,
+
+  "subtitle_enabled": true,
+  "subtitle_position": "bottom",
+  "font_size": 60,
+  "stroke_color": "#000000",
+  "stroke_width": 1.5,
+  "text_fore_color": "#FFFFFF",
+  "text_background_color": true,
+  "rounded_subtitle_background": false,
+
+  "video_source": "pexels",
+  "video_clip_duration": 5,
+  "video_concat_mode": "random",
+  "match_materials_to_script": false,
+  "video_count": 1,
+  "n_threads": 2,
+  "paragraph_number": 1,
+
+  "render_final_sequential": true,
+  "audio_integrity_validation": true,
+  "freeze_detection": true,
+
+  "script_prompt_template": "Escribe exactamente entre {word_count_min} y {word_count_max} palabras. Sigue esta estructura en tres partes sin etiquetas ni títulos:\n\nPARTE 1 — GANCHO (primeras 1 o 2 oraciones): empieza con una afirmación directa y específica que contradiga una creencia común o nombre un error concreto. La primera oración debe ser una tesis breve. No uses preguntas retóricas. No uses 'Imagina que', 'Qué pasaría si', 'Hoy te voy a contar' ni ninguna variante de introducción indirecta.\n\nPARTE 2 — DESARROLLO (cuerpo central): presenta uno o dos casos o situaciones específicas que ilustren el punto. Nombra contextos reales: una tarea laboral, una herramienta concreta, una situación reconocible. Evita generalizaciones vagas. Usa segunda persona directa cuando sea natural. Máximo 15 palabras por oración.\n\nPARTE 3 — CIERRE (última oración): termina con una sola acción concreta que el oyente puede hacer hoy. No uses 'reflexiona sobre', 'piensa en', 'toma un momento', ni cierres inspiracionales. El cierre debe nombrar algo específico y realizable.\n\nREGLAS ABSOLUTAS: solo texto de narración continua en español. Sin markdown, sin títulos, sin numeración, sin viñetas. Sin estas frases o sus variantes: 'en el mundo actual', 'la clave está en', 'es fundamental que', 'todos lo sabemos', 'ha llegado el momento de', 'en la era de la IA', 'cada vez más', 'sin duda', 'definitivamente'. La especificidad reemplaza la generalidad."
+}
